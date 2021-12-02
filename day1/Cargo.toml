@@ -9,9 +9,9 @@ edition = "2021"
 itertools = "0.8.0"
 
 [[bin]]
-name = "day1"
-path = "day1.rs"
+name = "day1_1"
+path = "src/day1_1.rs"
 
 [[bin]]
 name = "day1_2"
-path = "day1_2.rs"
+path = "src/day1_2.rs"
