@@ -1,19 +1,26 @@
-use itertools::Itertools;
 use std::fs::File;
-use std::io::{self, prelude::*, BufReader};
+use std::io::{self, prelude::BufRead, BufReader};
 
 fn main() -> io::Result<()> {
     let file = File::open("input.txt")?;
     let reader = BufReader::new(file);
 
-    let increase_count: u32 = reader
-        .lines()
-        .map(|l| l.unwrap().parse::<u32>().expect("parse_error"))
-        .tuple_windows()
-        .map(|(a, b)| if b > a { 1 } else { 0 })
-        .sum();
+    let mut x: i32 = 0;
+    let mut z: i32 = 0;
+    for line in reader.lines() {
+        let parsed = line.unwrap();
+        let v: Vec<&str> = parsed.split(" ").collect();
+        let dir = v[0];
+        let amt: i32 = v[1].parse().unwrap();
+        match dir {
+            "forward" => x += amt,
+            "down" => z += amt,
+            "up" => z -= amt,
+            &_ => continue,
+        }
+    }
 
-    println!("Increase count: {}", increase_count);
+    println!("x {x} z {z} product {p}", x = x, z = z, p = x * z);
 
     Ok(())
 }
